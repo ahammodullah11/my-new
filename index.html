@@ -1,13 +1,91 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="bn">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width= , initial-scale=1.0">
-    <title>my web site</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>পালিয়ে যাওয়া বাটন</title>
+
+  <style>
+    /* পুরো পেজের ডিজাইন */
+    body {
+      background: #fff7ed;
+      display: flex;
+      align-items: center;       /* মাঝখানে আনে (উপর-নিচ) */
+      justify-content: center;   /* মাঝখানে আনে (ডান-বাম) */
+      height: 100vh;
+      margin: 0;
+      font-family: sans-serif;
+    }
+
+    /* সাদা কার্ড */
+    .card {
+      background: rgb(138, 14, 14);
+      padding: 30px;
+      border-radius: 20px;
+      text-align: center;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+    }
+
+    /* দুটো বাটনের সাধারণ ডিজাইন */
+    button {
+      border: none;
+      border-radius: 12px;
+      padding: 12px 28px;
+      font-size: 18px;
+      color: white;
+      cursor: pointer;
+      margin: 0 8px;
+    }
+
+    #yes { background: green; }
+    #no  { background: red; }
+  </style>
 </head>
+
 <body>
-    <header>
-        
-    </header>
+  <!-- পেজের কনটেন্ট -->
+  <div class="card">
+    <h1 id="emoji">🎮</h1>
+    <h2>আজ কি ফ্রি ফায়ার খেলবে?</h2>
+    <p id="msg">ভেবে উত্তর দাও 😏</p>
+
+    <button id="yes">হ্যাঁ</button>
+    <button id="no">না</button>
+  </div>
+
+  <script>
+    // বাটনগুলো ধরে ভ্যারিয়েবলে রাখলাম
+    const yes = document.getElementById("yes");
+    const no = document.getElementById("no");
+    const msg = document.getElementById("msg");
+    const emoji = document.getElementById("emoji");
+
+    // "হ্যাঁ" বাটন পালানোর ফাংশন
+    function run() {
+      // স্ক্রিনের মধ্যে র‍্যান্ডম জায়গা বের করা
+      const x = Math.random() * (window.innerWidth - 100);
+      const y = Math.random() * (window.innerHeight - 50);
+
+      // বাটনকে ওই জায়গায় সরিয়ে দেওয়া
+      yes.style.position = "fixed";
+      yes.style.left = x + "px";
+      yes.style.top = y + "px";
+
+      msg.textContent = "ধরতে পারলে না 😜";
+      emoji.textContent = "🏃";
+    }
+
+    // মাউস বাটনের ওপর গেলেই পালাবে (কম্পিউটার)
+    yes.addEventListener("mouseover", run);
+
+    // ফোনে ছুঁলেই পালাবে
+    yes.addEventListener("touchstart", run);
+
+    // "না" চাপলে অভিনন্দন
+    no.addEventListener("click", function () {
+      emoji.textContent = "🎉";
+      msg.textContent = "দারুণ সিদ্ধান্ত! এবার কোডিং করো 👨‍💻";
+    });
+  </script>
 </body>
 </html>
